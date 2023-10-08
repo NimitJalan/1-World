@@ -1,12 +1,10 @@
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from .models import User
+from django.forms import forms
 
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = UserCreationForm.Meta.fields
+class RegisterForm(forms.Form):
+    
 
 # Create your views here.
 def index(request):
@@ -14,12 +12,4 @@ def index(request):
     })
 
 def register(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('index')
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'oneWorldApp/register.html', {'form': form})
+    pass
